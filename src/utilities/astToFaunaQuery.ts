@@ -68,7 +68,18 @@ export const astToFaunaQuery = (ast, query) => {
                         isList
                     )
                 } else if (isLeaf) {
+                    const field = typeInfo.getFieldDef()
                     let selector
+
+                    console.log(field)
+                    console.log('is field.fql?')
+                    // @ts-ignore 2
+                    if (field.fql) {
+                        console.log('yes field.fql')
+                        // @ts-ignore 2
+                        return { [name]: field.fql(q) }
+                    }
+                    console.log('no field.fql')
                     if (name === "id") {
                         selector = ["ref"]
                     } else if (name === "ts") {
