@@ -42,11 +42,15 @@ exports.astToFaunaQuery = (ast, query) => {
                 else if (isLeaf) {
                     const field = typeInfo.getFieldDef();
                     let selector;
+                    console.log(field);
+                    console.log('is field.fql?');
                     // @ts-ignore 2
                     if (field.fql) {
+                        console.log('yes field.fql');
                         // @ts-ignore 2
                         return { [name]: field.fql(faunadb_fql_lib_1.query) };
                     }
+                    console.log('no field.fql');
                     if (name === "id") {
                         selector = ["ref"];
                     }
